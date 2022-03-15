@@ -4,17 +4,21 @@ import json
 
 app = Flask(__name__)
 
-def post_actions(data):
-    return data
+data = []
+
+def post_actions(new_data):
+    global data
+    data.insert(0, new_data)
 
 @app.route("/notify-uplink", methods=['GET', 'POST'])
 def notify_uplink():
+    global data
     if request.method == 'POST':
         if request.data:
                 rcv_data = json.loads(request.data.decode(encoding='utf-8'))
                 rsp = post_actions(rcv_data)
-                if rsp:
-                    return rsp
+                if len(data) != 0:
+                    return data[0]
                 else:
                     return '200'
         else:
@@ -27,7 +31,12 @@ def notify_uplink():
 
 @app.route("/")
 def indx():
-    return "Projet M2 IOT - Pilulier Intelligent"
+    global data
+    to_display = "Projet M2 IOT - Pilulier Intelligent</br></br>"
+    if len(data) != 0:
+        for item in data:
+            to_display += item + "</br>"
+    return to_display
     #if request.method:
     #    if request.method == 'POST':
     #        if request.data:
