@@ -10,7 +10,7 @@ def post_actions(data):
 @app.route("/", methods=['GET', 'POST'])
 def indx():
     #return "Hello World"
-    if request.method != None:
+    if request.method:
         if request.method == 'POST':
             if request.data:
                 rcv_data = json.loads(request.data.decode(encoding='utf-8'))
