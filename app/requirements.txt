@@ -1,0 +1,4 @@
+#ttn
+#paho-mqtt
+flask
+gunicorn

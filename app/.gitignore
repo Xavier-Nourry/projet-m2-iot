@@ -2,4 +2,3 @@ Dockerfile
 infrastructure.txt
 mqtt_script.py
 ttn_script.py
-requirements.txt
