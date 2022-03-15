@@ -20,6 +20,3 @@ def indx():
                 return '200'
         else:
             return '404'
-
-if __name__ == "__main__":
-    app.run(host='localhost', port='8000')
