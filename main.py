@@ -31,10 +31,10 @@ def notify_uplink():
 @app.route("/")
 def indx():
     global data
-    to_display = "<h2>Projet M2 IOT - Pilulier Intelligent</h2></br></br>"
+    to_display = "<h2>Projet M2 IOT - Pilulier Intelligent</h2> </br></br>"
     if len(data) != 0:
         for item in data:
-            to_display += str(item) + "</br>"
+            to_display += str(item) + " </br></br>"
     return to_display
     #if request.method:
     #    if request.method == 'POST':
