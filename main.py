@@ -6,17 +6,14 @@ app = Flask(__name__)
 
 data = []
 
-def post_actions(new_data):
-    global data
-    data.insert(0, new_data)
-
 @app.route("/notify-uplink", methods=['GET', 'POST'])
 def notify_uplink():
     global data
     if request.method == 'POST':
         if request.data:
                 rcv_data = json.loads(request.data.decode(encoding='utf-8'))
-                rsp = post_actions(rcv_data)
+                if rcv_data: 
+                    data.insert(0, rcv_data)
                 if len(data) != 0:
                     return data[0]
                 else:
