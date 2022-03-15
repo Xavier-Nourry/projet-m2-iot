@@ -22,4 +22,4 @@ def indx():
             return '404'
 
 if __name__ == "__main__":
-    app.run(host='localhost', port='43560')
+    app.run(host='localhost', port='8000')
