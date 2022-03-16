@@ -14,7 +14,7 @@ def notify_uplink():
         "message": "Alerte SmartPills : Roger n'a pas pris ses cachets"
     },
     files = {
-        "attachment": ("logo.jpg", open("resources/images/logo.jpg", "rb"), "image/jpeg")
+        "attachment": ("logo.png", open("resources/images/logo.png", "rb"), "image/png")
     })
     #conn = http.client.HTTPSConnection("api.pushover.net:443")
     #conn.request("POST", "/1/messages.json",
