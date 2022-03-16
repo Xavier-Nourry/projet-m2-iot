@@ -1,6 +1,4 @@
-from flask import Flask, request
-from flask import request
-import json
+from flask import Flask
 import http.client, urllib
 
 
