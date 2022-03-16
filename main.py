@@ -1,5 +1,4 @@
 from flask import Flask
-import http.client, urllib
 import requests
 
 
@@ -16,13 +15,6 @@ def notify_uplink():
     files = {
         "attachment": ("logo.png", open("resources/images/logo.png", "rb"), "image/png")
     })
-    #conn = http.client.HTTPSConnection("api.pushover.net:443")
-    #conn.request("POST", "/1/messages.json",
-    #urllib.parse.urlencode({
-    #    "token": "afneydpm7t3oxqg64o4vgi7kchjrzk",
-    #    "user": "uspcin8whkjxgveh9oy2ursk24w3vr",
-    #    "message": "Alerte SmartPillBox : Roger n'a pas pris ses cachets",
-    #}), { "Content-type": "application/x-www-form-urlencoded" })
     
 
 @app.route("/")
