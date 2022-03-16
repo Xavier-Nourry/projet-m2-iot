@@ -10,7 +10,7 @@ def notify_uplink():
     r = requests.post("https://api.pushover.net/1/messages.json", data = {
         "token": "afneydpm7t3oxqg64o4vgi7kchjrzk",
         "user": "uspcin8whkjxgveh9oy2ursk24w3vr",
-        "message": "Alerte SmartPills : Roger n'a pas pris ses cachets"
+        "message": "Alerte ! Roger Martinez (185 Rue de la paix) n'a pas pris ses cachets"
     },
     files = {
         "attachment": ("logo.png", open("resources/images/logo.png", "rb"), "image/png")
