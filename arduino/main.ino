@@ -14,7 +14,11 @@ const char *APP_SKEY = "815DC9CB8FCE1223203EE74DCDFC97E7";
 const int ENGINE_PIN = 12;
 const int SWITCH_PIN = 4;
 const int BUTTON_PIN = 8;
-const int LEDS_PIN = 7;
+const int LED_PIN = 7;
+const int BUZZER_PIN = 2;
+const int BUZZER_SWITCH_PIN = 6;
+const int BIPS_NB = 4;
+const int BIPS_FREQ = 250; // milliseconds
 const int NB_ROT = 7;
 const int ROT_ANGLE = (int)(155 / (float) 8);
 const int TIME_DISTRIB = 2500; // milliseconds
@@ -30,12 +34,19 @@ time_t start_time;
 time_t current_time;
 Servo engine;
 
-// Fait clignoter une led avec la fréquence en millisecondes souhaitée
-void wink_led(int LEDS_PIN, int freq){
-  digitalWrite(LEDS_PIN, HIGH);
-  delay(freq);
-  digitalWrite(LEDS_PIN, LOW);
-  delay(freq);
+// Fait clignoter une led et bipper un buzzer avec la fréquence en millisecondes souhaitée
+void take_pills_alert(){
+  for(int i = 0; i < BIPS_NB; i++){
+    digitalWrite(LED_PIN, HIGH);
+    if(digitalRead(BUZZER_SWITCH_PIN) == HIGH){
+      digitalWrite(BUZZER_PIN, HIGH);
+    }
+    delay(BIPS_FREQ);
+    digitalWrite(LED_PIN, LOW);
+    digitalWrite(BUZZER_PIN, LOW);
+    delay(BIPS_FREQ);
+  }
+  delay(2000);
 }
 
 // Lance un appel d'urgence via LORA (lié à une application IP)
@@ -56,8 +67,10 @@ void setup() {
   engine.attach(ENGINE_PIN);
   pinMode(ENGINE_PIN, OUTPUT);
   pinMode(SWITCH_PIN, INPUT);  
-  pinMode(LEDS_PIN, OUTPUT);
-  digitalWrite(LEDS_PIN, LOW);
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUZZER_SWITCH_PIN, INPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
   engine.write(actual_angle);
 }
 
@@ -77,7 +90,7 @@ void loop() {
     start_time = current_time;
     while(digitalRead(BUTTON_PIN) != LOW){ // TODO : voir si nécessaire de faire des actions en parallèle
       current_time = now();
-      wink_led(LEDS_PIN, 250);
+      take_pills_alert();
       if(current_time >= start_time + TIME_TO_WAIT){
         start_time = now();
         emergency_call();
