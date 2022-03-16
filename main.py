@@ -1,18 +1,24 @@
 from flask import Flask, request
 from flask import request
 import json
+import http.client, urllib
 
 app = Flask(__name__)
 
-data = []
-
 @app.route("/notify-uplink", methods=['GET', 'POST'])
 def notify_uplink():
-    global data
-    if request.data:
-        rcv_data = json.loads(request.data.decode(encoding='utf-8'))
-        if rcv_data: 
-            data.insert(0, rcv_data)
+    conn = http.client.HTTPSConnection("api.pushover.net:443")
+    conn.request("POST", "/1/messages.json",
+    urllib.parse.urlencode({
+        "token": "afneydpm7t3oxqg64o4vgi7kchjrzk",
+        "user": "uspcin8whkjxgveh9oy2ursk24w3vr",
+        "message": "Attention !!! : Roger va mourir",
+    }), { "Content-type": "application/x-www-form-urlencoded" })
+    conn.getresponse()
+    #if request.data:
+    #    rcv_data = json.loads(request.data.decode(encoding='utf-8'))
+    #    if rcv_data: 
+    #        data.insert(0, rcv_data)
     #if request.method == 'POST':
     #    if request.data:
     #            rcv_data = json.loads(request.data.decode(encoding='utf-8'))
@@ -30,12 +36,7 @@ def notify_uplink():
 
 @app.route("/")
 def indx():
-    global data
-    to_display = "<h2>Projet M2 IOT - Pilulier Intelligent</h2> </br></br><p>"
-    if len(data) != 0:
-        for item in data:
-            to_display += str(item) + " </br></br>"
-    return to_display + "</p>"
+    return "<h2>Projet M2 IOT - Pilulier Intelligent</h2>"
     #if request.method:
     #    if request.method == 'POST':
     #        if request.data:
