@@ -7,9 +7,9 @@
 #define loraSerial Serial1
 #define debugSerial Serial
 #define freqPlan TTN_FP_EU868
-const char *DEV_ADDR = "260B9F2A";
-const char *NWK_SKEY = "C927B91EDAFD2FFC7EB2DAB162F90BA1";
-const char *APP_SKEY = "815DC9CB8FCE1223203EE74DCDFC97E7";
+const char *DEV_ADDR = "260B9F2A"; // TTN (the things network) credentials
+const char *NWK_SKEY = "C927B91EDAFD2FFC7EB2DAB162F90BA1"; // TTN (the things network) credentials
+const char *APP_SKEY = "815DC9CB8FCE1223203EE74DCDFC97E7"; // TTN (the things network) credentials
 
 const int ENGINE_PIN = 4;
 const int SWITCH_PIN = 8;
