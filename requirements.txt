@@ -1,5 +1,3 @@
-#ttn
-#paho-mqtt
 flask
 gunicorn
 requests
